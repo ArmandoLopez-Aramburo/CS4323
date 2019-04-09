@@ -58,11 +58,21 @@ def get_m_time(fol, m):
         for i in file:
             mtime = int((time.time() - os.path.getmtime(folder + '/' + i)) / 60)
             if toggle == '+' and mtime > mmin:
-                print folder, '/', i, ' - ', mtime
+                print folder + '/' + i, '- ', mtime
             elif toggle == '-' and mtime < mmin:
-                print folder, ',', i, ' - ', mtime
+                print folder + '/'+ i, '- ', mtime
             elif toggle == '' and mtime == mmin:
-                print folder, ',', i, ' - ', mtime
+                print folder + '/' + i, '- ', mtime
+
+
+# Find a file by inode number
+def find_inode(fol, num):
+    num = int(num)
+    for folder, subs, file in os.walk(fol):
+        for i in file:
+            inode = os.stat(folder + '/' + i)[1]
+            if num == inode:
+                 print  folder + '/' + i, '- ', inode
 
 
 def run():
@@ -76,6 +86,8 @@ def run():
                 search(find_folder(command[1]), command[3])
             elif '-mmin' == command[2]:
                 get_m_time(find_folder(command[1]), command[3])
+            elif '-inum' == command[2]:
+                find_inode(find_folder(command[1]), command[3])
             elif '-delete' == command[2]:
                 rem_file(find_folder(command[1]), command[3])
         elif 'exit' in command:
