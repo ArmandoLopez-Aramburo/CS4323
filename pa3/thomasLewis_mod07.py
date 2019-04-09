@@ -33,6 +33,15 @@ def find_folder(fol):
             return folder
 
 
+# Find a specific file (no partial matches)
+def rem_file(fol, filename):
+    for folder, subs, file in os.walk(fol):
+        for i in file:
+            if filename == i:
+                os.remove(folder + '/' + i)
+                print 'Removed file: ', folder, '/', i
+
+
 # Print how many minute ago a file was modified based on -mmin args
 def get_m_time(fol, m):
     if '-' in m:
@@ -67,6 +76,8 @@ def run():
                 search(find_folder(command[1]), command[3])
             elif '-mmin' == command[2]:
                 get_m_time(find_folder(command[1]), command[3])
+            elif '-delete' == command[2]:
+                rem_file(find_folder(command[1]), command[3])
         elif 'exit' in command:
             exit()
 
