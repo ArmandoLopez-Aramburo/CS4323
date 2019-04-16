@@ -5,8 +5,8 @@ import os
 import time
 
 # Setup paths
-# cwd = '/home/tholewi/CS4323/pa3/testdir'
-cwd = 'C:\\Users\\thoma\\PycharmProjects\\CS4323\\pa3\\testdir'
+cwd = '/home/tholewi/CS4323/pa3/testdir'
+# cwd = 'C:\\Users\\thoma\\PycharmProjects\\CS4323\\pa3\\testdir'
 
 # Change dir to the cwd
 os.chdir(cwd)
@@ -93,7 +93,7 @@ def run():
 	while (True):
 		command = raw_input('$ ').split()
 
-		if command[0] == 'find'
+                if command[0] == 'find':
 			if len(command) == 2 and 'find' == command[0]:
 				search_folder(find_folder(command[1]))
 			elif len(command) == 4:
@@ -105,16 +105,16 @@ def run():
 					print find_inode(find_folder(command[1]), command[3])
 			elif len(command) == 5 and command[4] == '-delete':
 				if '-name' == command[2]:
-					for i in search(find_folder(command[1]), command[3]):
-						# os.remove(i)
+                                        for i in search(find_folder(command[1]), command[3]):
+						os.remove(i)
 						print 'Removed file: ', i
 				elif '-mmin' == command[2]:
 					for i in get_m_time(find_folder(command[1]), command[3]):
-						# os.remove(i)
+						os.remove(i)
 						print 'Removed file: ', i
 				elif '-inum' == command[2]:
 					for i in find_inode(find_folder(command[1]), command[3]):
-						# os.remove(i)
+						os.remove(i)
 						print 'Removed file: ', i
 		elif 'exit' in command:
 			exit()
